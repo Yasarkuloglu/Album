@@ -1,0 +1,273 @@
+/* Genel Ayarlamalar */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+    overflow: hidden;
+}
+
+.album-container {
+    perspective: 1000px; /* 3D efekti için */
+    position: relative;
+    width: 650px;
+    height: 700px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    background-color: #fff;
+    max-width: 95%; /* Mobil uyumluluk */
+    max-height: 95vh; /* Mobil uyumluluk */
+}
+
+/* Albüm Kapağı */
+.album-cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #333;
+    cursor: pointer;
+    transition: transform 0.8s ease-in-out, opacity 0.8s ease-in-out;
+    transform-origin: left center;
+    z-index: 2;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.album-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.cover-text {
+    position: absolute;
+    bottom: 30px;
+    font-size: 2em;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    z-index: 3;
+}
+
+.album-cover:hover .cover-text {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Kapak Açık Durumu */
+.album-cover.open {
+    transform: rotateY(-180deg);
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Fotoğraf Galerisi */
+.photo-gallery {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #fff;
+    border-radius: 10px;
+    opacity: 0; /* Başlangıçta gizli */
+    pointer-events: none; /* Başlangıçta tıklanmasını engelle */
+    transition: opacity 0.8s ease-in-out;
+    z-index: 1;
+}
+
+.photo-gallery.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.photo-display {
+    text-align: center;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.photo-display img {
+    max-width: 90%;
+    max-height: 80%;
+    object-fit: contain;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+.photo-display p {
+    margin-top: 15px;
+    font-size: 1.1em;
+    color: #555;
+}
+
+.navigation-buttons {
+    margin-top: 20px;
+    display: flex;
+    gap: 15px;
+    width: 100%;
+    justify-content: center;
+}
+
+.navigation-buttons button,
+.close-album-btn {
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.navigation-buttons button:hover,
+.close-album-btn:hover {
+    background-color: #0056b3;
+}
+
+.thumbnail-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 10px;
+    margin-top: 20px;
+    width: 100%;
+    max-height: 120px;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+.thumbnail-grid img {
+    width: 100%;
+    height: 80px;
+    object-fit: cover;
+    border: 2px solid transparent;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.thumbnail-grid img:hover {
+    border-color: #007bff;
+    transform: scale(1.05);
+}
+
+.thumbnail-grid img.active {
+    border-color: #ffc107;
+    box-shadow: 0 0 8px rgba(255, 193, 7, 0.6);
+}
+
+.close-album-btn {
+    margin-top: 20px;
+    background-color: #dc3545;
+}
+
+.close-album-btn:hover {
+    background-color: #c82333;
+}
+
+/* --- MEDYA SORGULARI (Telefonlar İçin Duyarlı Tasarım) --- */
+@media (max-width: 768px) {
+    .album-container {
+        width: 95%;
+        height: 90vh;
+        margin: 0 auto;
+        border-radius: 5px;
+    }
+
+    .album-cover .cover-text {
+        font-size: 1.5em;
+        padding: 8px 15px;
+    }
+
+    .photo-gallery {
+        padding: 15px;
+    }
+
+    .photo-display img {
+        max-width: 100%;
+        max-height: 70%;
+    }
+
+    .photo-display p {
+        font-size: 0.9em;
+        margin-top: 10px;
+    }
+
+    .navigation-buttons {
+        flex-direction: row;
+        justify-content: space-around;
+        gap: 10px;
+        margin-top: 15px;
+    }
+
+    .navigation-buttons button,
+    .close-album-btn {
+        padding: 8px 12px;
+        font-size: 0.8em;
+    }
+
+    .thumbnail-grid {
+        grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+        gap: 5px;
+        max-height: 80px;
+    }
+
+    .thumbnail-grid img {
+        height: 50px;
+    }
+}
+
+@media (max-width: 480px) {
+    .album-container {
+        height: 95vh;
+    }
+
+    .navigation-buttons {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .navigation-buttons button,
+    .close-album-btn {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .thumbnail-grid {
+        grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+        gap: 4px;
+        max-height: 60px;
+    }
+
+    .thumbnail-grid img {
+        height: 40px;
+    }
+}
+
+.album-cover,
+.photo-gallery {
+    transition: transform 0.8s ease-in-out, opacity 0.8s ease-in-out;
+}
