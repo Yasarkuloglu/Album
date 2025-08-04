@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Fotoğraf Albümü</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="album-container">
+
+        <div class="album-cover" id="albumCover">
+            <img src="images/kapak.png" alt="Fotoğraf Albümü Kapağı">
+		</div>
+        <div class="photo-gallery" id="photoGallery">
+            <div class="photo-display">
+                <img id="mainPhoto" src="" alt="Albüm Fotoğrafı">
+                <p id="photoCaption"></p>
+            </div>
+
+            <div class="navigation-buttons">
+                <button id="prevBtn">Önceki</button>
+                <button id="nextBtn">Sonraki</button>
+            </div>
+
+            <div class="thumbnail-grid" id="thumbnailGrid">
+                </div>
+
+            <button class="close-album-btn" id="closeAlbumBtn">Albümü Kapat</button>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
